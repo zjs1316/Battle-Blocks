@@ -43,7 +43,7 @@ public class MyNetworkManager: NetworkManager
 	void SetIPAddress ()
 	{
 		string ipAddress = GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text;
-		NetworkManager.singleton.networkAddress = Network.player.ipAddress; //ipAddress;
+		NetworkManager.singleton.networkAddress = ipAddress; //ipAddress;
 	}
 
 	void SetPlayerUsername()
