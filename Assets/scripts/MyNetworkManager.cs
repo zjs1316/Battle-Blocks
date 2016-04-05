@@ -60,7 +60,7 @@ public class MyNetworkManager: NetworkManager
 	public void StartupHost ()
 	{
 		print ("clicked button, starting host (we hope)");
-		SetIPAddress ();
+		NetworkManager.singleton.networkAddress = Network.player.ipAddress; //ipAddress;
 		SetPlayerUsername();
 		SetPort ();
 		NetworkManager.singleton.StartHost ();
@@ -69,7 +69,8 @@ public class MyNetworkManager: NetworkManager
 	public void JoinGame ()
 	{
 		print ("clicked button, join game");
-		SetIPAddress ();
+		string ipAddress = GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text;
+		NetworkManager.singleton.networkAddress = ipAddress; //ipAddress;
 		SetPlayerUsername();
 		SetPort ();
 		NetworkManager.singleton.StartClient ();
