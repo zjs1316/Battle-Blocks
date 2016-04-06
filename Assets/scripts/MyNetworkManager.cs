@@ -44,6 +44,7 @@ public class MyNetworkManager: NetworkManager
 	{
 		string ipAddress = GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text;
 		NetworkManager.singleton.networkAddress = ipAddress; //ipAddress;
+		//NetworkManager.singleton.
 	}
 
 	void SetPlayerUsername()
@@ -70,9 +71,9 @@ public class MyNetworkManager: NetworkManager
 	{
 		print ("clicked button, join game");
 		string ipAddress = GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text;
-		NetworkManager.singleton.networkAddress = ipAddress; //ipAddress;
+		Network.Connect (ipAddress, 7777);
 		SetPlayerUsername();
-		SetPort ();
+
 		NetworkManager.singleton.StartClient ();
 	}
 	
