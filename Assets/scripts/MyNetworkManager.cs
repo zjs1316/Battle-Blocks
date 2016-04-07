@@ -43,6 +43,7 @@ public class MyNetworkManager: NetworkManager
 	void SetIPAddress ()
 	{
 		string ipAddress = GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text;
+		print (GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text);
 		NetworkManager.singleton.networkAddress = ipAddress; //ipAddress;
 		//NetworkManager.singleton.
 	}
@@ -62,8 +63,10 @@ public class MyNetworkManager: NetworkManager
 	{
 		print ("clicked button, starting host (we hope)");
 		NetworkManager.singleton.networkAddress = Network.player.ipAddress; //ipAddress;
+		print(NetworkManager.singleton.networkAddress);
 		SetPlayerUsername();
 		SetPort ();
+		print (Network.player.ipAddress);
 		NetworkManager.singleton.StartHost ();
 	}
 	
@@ -71,9 +74,9 @@ public class MyNetworkManager: NetworkManager
 	{
 		print ("clicked button, join game");
 		string ipAddress = GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text;
-		Network.Connect (ipAddress, 7777);
+		print (GameObject.Find ("txtIP").transform.FindChild ("Text").GetComponent<Text> ().text);
 		SetPlayerUsername();
-
+		Network.Connect (ipAddress, 7777);
 		NetworkManager.singleton.StartClient ();
 	}
 	

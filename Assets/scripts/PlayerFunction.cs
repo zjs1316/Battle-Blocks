@@ -210,7 +210,7 @@ public class PlayerFunction : NetworkBehaviour
     // Use this for initialization
     public void Start ()
 	{
-		gameObject.transform.position = new Vector3(0,5,0);
+		//gameObject.transform.position = new Vector3(0,5,0);
 		bulletManagerScript = transform.FindChild("BulletManager").GetComponent<BulletManager> ();
 		destination = mover.position; //set the destination to the objects position when the script is run the first time
 		DontDestroyOnLoad(gameObject);
