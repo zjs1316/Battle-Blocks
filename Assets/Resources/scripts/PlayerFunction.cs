@@ -7,6 +7,8 @@ using System.Collections.Generic;
 public class PlayerFunction : NetworkBehaviour 
 {
 
+	public GameObject bulletPrefab;
+
 	public BulletScript bulletScript;
 	public Transform mover; //the object being moved
 	public float SnapTo = 2f; //how close we get before snapping to the desination
@@ -1544,7 +1546,7 @@ public class PlayerFunction : NetworkBehaviour
 		print (ZSpeed);
 		//set the transform of the bullet then instantiate and spawn
 		GetMouseBulletClickLocation ();
-		GameObject bullet = (GameObject)Resources.Load ("bullet");
+		GameObject bullet = bulletPrefab;
 		//print ("Spawn " + bullet);
 		//bullet.SetActive (true);
 		Vector3 bulletPos =  new Vector3(parent.x + XPosOff + XNegOff, parent.y, parent.z + ZNegOff + ZPosOff);
@@ -1571,7 +1573,7 @@ public class PlayerFunction : NetworkBehaviour
 	{
 		GetMouseBulletClickLocation ();
 		//set the transform of the bullet then instantiate and spawn
-		GameObject bullet = (GameObject)Resources.Load ("bullet");
+		GameObject bullet = bulletPrefab;
 		//print ("Spawn " + bullet);
 		//bullet.SetActive (true);
 		Vector3 bulletPos =  new Vector3(parent.x + XPosOff + XNegOff, parent.y, parent.z + ZNegOff + ZPosOff);

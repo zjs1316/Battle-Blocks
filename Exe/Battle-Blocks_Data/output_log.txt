@@ -14,9 +14,56 @@ Platform assembly: C:\Users\ps2fr\Documents\Battle-Blocks\Exe\Battle-Blocks_Data
 Loading C:\Users\ps2fr\Documents\Battle-Blocks\Exe\Battle-Blocks_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\ps2fr\Documents\Battle-Blocks\Exe\Battle-Blocks_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\ps2fr\Documents\Battle-Blocks\Exe\Battle-Blocks_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.062 seconds
+- Completed reload, in  0.036 seconds
 Platform assembly: C:\Users\ps2fr\Documents\Battle-Blocks\Exe\Battle-Blocks_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\ps2fr\Documents\Battle-Blocks\Exe\Battle-Blocks_Data\Managed\System.dll (this message is harmless)
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.510252 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 32e50 -> priority: 1 
+  Thread -> id: 32e54 -> priority: 1 
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+JSON Response: [[UnityEngine.Networking.Match.ListMatchResponse]-success:True-extendedInfo:]-matches.Count:1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+JSON Response: [[UnityEngine.Networking.Match.JoinMatchResponse]-success:True-extendedInfo:]-address:52.86.130.215,port:9999,networkId:0x0010000000000B87,nodeId:0x080D,usingRelay:True
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+A connection has already been set as ready. There can only be one.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.171234 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 721.
+Total: 0.416999 ms (FindLiveObjects: 0.038708 ms CreateObjectMapping: 0.022286 ms MarkObjects: 0.348379 ms  DeleteObjects: 0.006744 ms)
+
+DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
+ 
+(Filename:  Line: 374)
+
+DontDestroyOnLoad only work for root GameObjects or components on root GameObjects.
+ 
+(Filename:  Line: 374)
+
+set color fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+
+set color fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 37)
+

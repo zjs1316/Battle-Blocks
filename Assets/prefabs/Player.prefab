@@ -67,8 +67,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.1578751, y: -6.04134369, z: -3.07040191}
-  m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
+  m_LocalPosition: {x: -21.157875, y: -6.0413437, z: -3.070402}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 473570}
   m_RootOrder: 1
@@ -78,9 +78,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123862}
-  m_LocalRotation: {x: .42261833, y: 0, z: 0, w: .906307817}
-  m_LocalPosition: {x: 0, y: 14.3199997, z: -8.83988094}
-  m_LocalScale: {x: .100000001, y: .100000009, z: .099999994}
+  m_LocalRotation: {x: 0.42261833, y: 0, z: 0, w: 0.9063078}
+  m_LocalPosition: {x: 0, y: 14.32, z: -8.839881}
+  m_LocalScale: {x: 0.1, y: 0.10000001, z: 0.099999994}
   m_Children: []
   m_Father: {fileID: 473570}
   m_RootOrder: 0
@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 363.961487, y: 33.4543037, z: -702.488831}
+  m_LocalPosition: {x: 363.9615, y: 33.454304, z: -702.48883}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 434108}
@@ -107,14 +107,14 @@ Camera:
   m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: .300000012
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -130,7 +130,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
+  m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
 --- !u!23 &2347528
 MeshRenderer:
@@ -153,7 +153,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -174,7 +174,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426c7f13ac68e9543875957e66709847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 127044, guid: d79d06b0988c50740bf68cd1840ae7fc, type: 2}
   bulletScript: {fileID: 11421958, guid: d79d06b0988c50740bf68cd1840ae7fc, type: 2}
   mover: {fileID: 473570}
   SnapTo: 2
@@ -337,7 +338,7 @@ MonoBehaviour:
   maxHp: 100
   currentHp: 0
   health: 100
-  healthRegen: .5
+  healthRegen: 0.5
   regen: 1
   bul: {fileID: 127044, guid: d79d06b0988c50740bf68cd1840ae7fc, type: 2}
   img: {fileID: 0}
