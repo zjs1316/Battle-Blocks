@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\PlayerFunction.cs">
     <Files>
-      <File FileName="Assets\Resources\scripts\PlayerFunction.cs" Line="1545" Column="3" />
+      <File FileName="Assets\Resources\scripts\PlayerFunction.cs" Line="1081" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

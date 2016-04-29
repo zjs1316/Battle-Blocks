@@ -31,7 +31,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127044}
   m_LocalRotation: {x: 0, y: 0.72013557, z: 0, w: 0.6938334}
-  m_LocalPosition: {x: 47.19993, y: 5, z: 0.6654091}
+  m_LocalPosition: {x: 100.27536, y: 5, z: 86.535286}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,9 +116,9 @@ MonoBehaviour:
   playerCollision: 0
   xTarg: -20.171389
   zTarg: 88.6704
-  dmg: 3
+  dmg: 5
   direction: {x: -20.171389, y: 5, z: 88.6704}
-  targetLocation: {x: 32.585495, y: 5, z: 38.225266}
+  targetLocation: {x: 151.05815, y: 5, z: 85.69242}
 --- !u!114 &11435922
 MonoBehaviour:
   m_ObjectHideFlags: 1
