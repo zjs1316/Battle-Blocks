@@ -241,7 +241,10 @@ public class PlayerFunction : NetworkBehaviour
    
 
 	public Text healthText;
-
+ 
+	public string name;
+	public int kills = 0;
+	public int deaths = 0;
     // Use this for initialization
     public void Start ()
 	{
@@ -249,6 +252,7 @@ public class PlayerFunction : NetworkBehaviour
 
 		//All the Setup happens here
 		DontDestroyOnLoad(gameObject);
+		name = gameObject.GetComponentInParent<PlayerID> ().playerUniqueIdentity;
 		playerCam = gameObject.GetComponentInChildren<Camera>();
 		inst = (GameObject)Instantiate(moveMarker);
 		inst.SetActive(false);
@@ -260,6 +264,7 @@ public class PlayerFunction : NetworkBehaviour
 		//bul = (GameObject)Instantiate (bul);
 		bul = (GameObject)Resources.Load("bullet");
 
+		Debug.Log (name);
 
 		//UI setup
 		healthText = GameObject.Find ("Health Text").GetComponent<Text> ();
