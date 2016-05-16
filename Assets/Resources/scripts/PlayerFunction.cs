@@ -9,6 +9,8 @@ public class PlayerFunction : NetworkBehaviour
 
 	public GameObject bulletPrefab;
 
+	NavMeshAgent myAgent;
+
 	// If its the first time spawning a bullet, this boolean will send the client through
 	// a register prefab for the network if statement.
 	bool firstRegister = true;
@@ -257,6 +259,9 @@ public class PlayerFunction : NetworkBehaviour
 		//destination = mover.position; //set the destination to the objects position when the script is run the first time
 
 		//All the Setup happens here
+
+		myAgent = gameObject.GetComponent<NavMeshAgent> ();
+
 		DontDestroyOnLoad(gameObject);
 		name = gameObject.GetComponentInParent<PlayerID> ().playerUniqueIdentity;
 		playerCam = gameObject.GetComponentInChildren<Camera>();
@@ -1177,6 +1182,8 @@ public class PlayerFunction : NetworkBehaviour
 
 
 				//Player Movement
+			//Old point click move stuff
+			/*
 			if (Vector3.Distance(mover.position, destination) > SnapTo)
 			{
 				mover.position = Vector3.MoveTowards(mover.transform.position, destination, Time.deltaTime * speed);
@@ -1189,8 +1196,10 @@ public class PlayerFunction : NetworkBehaviour
 				mover.position = destination; //snap to destination
 				inst.SetActive(false);
 			}
+			*/
 
-
+			//new navmesh agent stuff
+			myAgent.destination = destination;
 
 
 
