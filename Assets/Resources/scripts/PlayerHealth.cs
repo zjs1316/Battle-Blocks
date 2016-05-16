@@ -7,7 +7,7 @@ public class PlayerHealth : NetworkBehaviour {
 	
 	[SyncVar (hook = "OnHealthDown")] private int health = 100;
 	private Text healthText;
-	private bool death = false;
+	public bool death = false;
 	public bool youDead = false;
 	
 	public delegate void DelegateDeath();

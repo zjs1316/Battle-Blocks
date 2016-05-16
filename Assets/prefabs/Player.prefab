@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 363.9615, y: 33.454304, z: -702.48883}
+  m_LocalPosition: {x: 816, y: 4, z: -63}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 434108}
@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c33e6f178173f47bcc397ab95f94ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  death: 0
   youDead: 0
 --- !u!114 &11487170
 MonoBehaviour:
@@ -328,21 +329,24 @@ MonoBehaviour:
   speed: 35
   damage: 15
   counter: 0
-  bulletManagerScript: {fileID: 0}
-  bulletManager: {fileID: 110042}
   moveMarker: {fileID: 189234, guid: 0e4fb04e441d126428c4fb9e8c4642f4, type: 2}
   R1Target: {fileID: 127012, guid: 9e81ac00cf5bce645be3a617984c7af2, type: 2}
   R1GhostTarget: {fileID: 100234, guid: 673dc5e46d46ea1459e3555e340101fd, type: 2}
   abilityOffsetx: 0
   abilityOffsetz: 0
-  maxHp: 100
-  currentHp: 0
-  health: 100
-  healthRegen: 0.5
-  regen: 1
   bul: {fileID: 127044, guid: d79d06b0988c50740bf68cd1840ae7fc, type: 2}
-  img: {fileID: 0}
-  txt: {fileID: 0}
+  QPanel: {fileID: 0}
+  QPanelHighlight: {fileID: 0}
+  QPanelText: {fileID: 0}
+  WPanel: {fileID: 0}
+  WPanelHighlight: {fileID: 0}
+  WPanelText: {fileID: 0}
+  EPanel: {fileID: 0}
+  EPanelHighlight: {fileID: 0}
+  EPanelText: {fileID: 0}
+  RPanel: {fileID: 0}
+  RPanelHighlight: {fileID: 0}
+  RPanelText: {fileID: 0}
   spawn:
   - {x: 1276, y: 4, z: -63}
   - {x: 816, y: 4, z: 390}
@@ -508,30 +512,31 @@ MonoBehaviour:
   - {x: 816, y: 4, z: 390}
   - {x: 1276, y: 4, z: 390}
   - {x: 816, y: 4, z: -63}
-  spawn1: {x: 1276, y: 4, z: -63}
-  spawn2: {x: 816, y: 4, z: 390}
-  spawn3: {x: 1276, y: 4, z: 390}
-  spawn4: {x: 816, y: 4, z: -63}
   player2: {fileID: 0}
   player3: {fileID: 0}
+  player4: {fileID: 0}
+  player5: {fileID: 0}
+  maxHp: 100
+  currentHp: 0
+  health: 100
+  healthRegen: 0.5
+  regen: 1
   basicSingleShot: 0
-  q2notImplemented: 0
-  fiveBurstMultiShot: 1
-  q4notImplemented: 0
-  threeAbilityDamageMultiplyer: 1
-  w2notImplemented: 0
+  fiveBurstMultiShot: 0
+  threeAbilityDamageMultiplyer: 0
   regenEnhance: 0
-  w4notImplemented: 0
   speedBoost: 0
-  e2notImplemented: 0
-  healthBoost: 1
+  healthBoost: 0
   boostIsOn: 0
-  e4NotImplemented: 0
   meteor: 0
-  r2notImplemented: 0
-  sniper: 1
+  sniper: 0
   armor: 0
   healthText: {fileID: 0}
+  name: 
+  kills: 0
+  deaths: 0
+  dbManager: {fileID: 0}
+  playerDBManager: {fileID: 0}
 --- !u!124 &12435344
 Behaviour:
   m_ObjectHideFlags: 1
@@ -648,7 +653,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: threeAbilityDamageMultiplyer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: speedBoost
@@ -693,15 +698,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: fiveBurstMultiShot
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: healthBoost
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: sniper
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

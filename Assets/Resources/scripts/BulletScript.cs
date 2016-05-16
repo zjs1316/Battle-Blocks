@@ -18,10 +18,16 @@ public class BulletScript : NetworkBehaviour {
     float createdAt;
 	public Rigidbody rb;
 	public GameObject Player;
+	public string shooter;
 	public bool collision = false;
 	public bool playerCollision = false;
 	public float xTarg, zTarg;
 	public float dmg;
+
+	public float OthersHealth;
+
+	public GameObject dbManager;
+	public PlayerDBManager playerDBManager;
 
 	[SyncVar]
 	public Vector3 direction;
@@ -30,8 +36,9 @@ public class BulletScript : NetworkBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		dbManager = GameObject.FindGameObjectWithTag ("DB");
+		playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
 		rb = GetComponent<Rigidbody>();
-
 		print ("target location on the bullet" + targetLocation);
 		NetworkServer.Spawn (gameObject);
 		//targetLocation.y = 5f;
@@ -93,14 +100,26 @@ public class BulletScript : NetworkBehaviour {
 		if (other.gameObject.tag == "Player") {
 			other.GetComponent<PlayerFunction> ().health = other.GetComponent<PlayerFunction> ().health -dmg;
 			RpcClientTakeDamage(other.gameObject);
+
+			OthersHealth = other.GetComponent<PlayerFunction> ().health;
+
+			IsItAKill ();
+
+
 			playerCollision = true;
+		}
+	}
+
+	void IsItAKill(){
+		if (OthersHealth <= 0) {
+			Player.GetComponent<PlayerFunction> ().kills = Player.GetComponent<PlayerFunction> ().kills + 1; 
+			playerDBManager.UpdateInfo (Player.GetComponent<PlayerFunction> ().kills, Player.GetComponent<PlayerFunction> ().deaths, shooter);
 		}
 	}
 
 	[ClientRpc]
 	public void RpcClientTakeDamage(GameObject other)
 	{
-
 		other.GetComponent<PlayerFunction> ().health = other.GetComponent<PlayerFunction> ().health -dmg;
 	}
 

@@ -30,6 +30,7 @@ TagManager:
   - r1
   - MiniMap
   - DB
+  - ScoreBoard
   layers:
   - Default
   - TransparentFX

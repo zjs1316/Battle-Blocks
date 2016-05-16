@@ -82,6 +82,8 @@ public class PlayerFunction : NetworkBehaviour
 	Vector3 spawn4 = new Vector3(816f, 4.0f, -63f); 
 	public GameObject player2;
 	public GameObject player3;
+	public GameObject player4;
+	public GameObject player5;
 
 
 	//reusable ability variables
@@ -245,6 +247,10 @@ public class PlayerFunction : NetworkBehaviour
 	public string name;
 	public int kills = 0;
 	public int deaths = 0;
+
+	public GameObject dbManager;
+	public PlayerDBManager playerDBManager;
+
     // Use this for initialization
     public void Start ()
 	{
@@ -264,8 +270,11 @@ public class PlayerFunction : NetworkBehaviour
 		//bul = (GameObject)Instantiate (bul);
 		bul = (GameObject)Resources.Load("bullet");
 
-		Debug.Log (name);
+		dbManager = GameObject.FindGameObjectWithTag ("DB");
+		playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
 
+		Debug.Log (name);
+		playerDBManager.InsertInfo (name, kills, deaths);
 		//UI setup
 		healthText = GameObject.Find ("Health Text").GetComponent<Text> ();
 
@@ -321,11 +330,13 @@ public class PlayerFunction : NetworkBehaviour
 
 	public void toArena()
 	{
+		
 		int r = Random.Range(0,4);
 		Vector3 temp = spawn [r];
 		float tempX =  temp.x;
 		float tempY =  temp.y;
 		float tempZ =  temp.z;
+
 		player2 = GameObject.Find ("Player 2");
 		player2.transform.position = new Vector3(tempX, tempY, tempZ);
 
@@ -336,6 +347,10 @@ public class PlayerFunction : NetworkBehaviour
 		//	V							V
 		player3 = GameObject.Find ("Player 3");
 		player3.transform.position = new Vector3(tempX, tempY, tempZ);
+		player4 = GameObject.Find ("Player 4");
+		player4.transform.position = new Vector3(tempX, tempY, tempZ);
+		player5 = GameObject.Find ("Player 5");
+		player5.transform.position = new Vector3(tempX, tempY, tempZ);
 	}
 
 
@@ -346,6 +361,7 @@ public class PlayerFunction : NetworkBehaviour
 			//print ("In Damage function");
 			//print (other.GetComponent<BulletScript> ().dmg);
 			health = health - other.GetComponent<BulletScript> ().dmg;
+
 			//playerCollision = true;
 		}
 
@@ -515,19 +531,25 @@ public class PlayerFunction : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
 		if(isLocalPlayer)
 		{
 			bulScale = Vector3.zero;
 			bulDmg=0f;
 
+			if (Input.GetKeyDown("m"))//auto-killer for testing
+			{
+				health = -1;
+			}
+
 			healthText.text = "Hp: " + health.ToString () + " / " + maxHp;
 
-			if(health<0)
+			if(health<=0)
 			{
 				gameObject.transform.position = new Vector3(0f,5f,0f);
-				health = 100;
+				deaths = deaths + 1;
 
+				playerDBManager.UpdateInfo (kills, deaths, name);
+				health = 100;
 			}
 
             
@@ -1240,11 +1262,11 @@ public class PlayerFunction : NetworkBehaviour
 					//										or just spawn the bullet ourselves bc we are the server.
 
 					if(!isServer){														// float XPosOff,float ZPosOff, float XNegOff, float ZNegOff,
-						CmdspawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						CmdspawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 					if(isServer)
 					{
-						spawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						spawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 					//exit the ability1on loop
 					abilityQ1IsOn = false; // don't know if this does anything currently but it works so I left it in there. Classic programming.
@@ -1306,11 +1328,11 @@ public class PlayerFunction : NetworkBehaviour
 
 					print ("bullet scale is:" + bulScale);
 					if(!isServer){														// float XPosOff,float ZPosOff, float XNegOff, float ZNegOff,
-						CmdspawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						CmdspawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 					if(isServer)
 					{
-						spawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						spawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 
 				}
@@ -1415,9 +1437,7 @@ public class PlayerFunction : NetworkBehaviour
 			if(healthBoost)
 			{
 				boostIsOn = !boostIsOn;
-				hpBoost();
-
-				
+				hpBoost();			
 			}
 
 			// E4
@@ -1460,11 +1480,11 @@ public class PlayerFunction : NetworkBehaviour
                             
                         
 					if(!isServer){														// float XPosOff,float ZPosOff, float XNegOff, float ZNegOff,
-						CmdspawnBullet(new Vector3(bulletDestination.x,bulletDestination.y+500f,bulletDestination.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						CmdspawnBullet(new Vector3(bulletDestination.x,bulletDestination.y+500f,bulletDestination.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 					if(isServer)
 					{
-						spawnBullet(new Vector3(bulletDestination.x,bulletDestination.y+500f,bulletDestination.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						spawnBullet(new Vector3(bulletDestination.x,bulletDestination.y+500f,bulletDestination.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
                             
 					//bulScale = new Vector3(5f,5f,5f);
@@ -1539,11 +1559,11 @@ public class PlayerFunction : NetworkBehaviour
 					else{xPosOff = 0f;}
 		
 					if(!isServer){														// float XPosOff,float ZPosOff, float XNegOff, float ZNegOff,
-						CmdspawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						CmdspawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 					if(isServer)
 					{
-						spawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage);
+						spawnBullet(new Vector3(transform.position.x,transform.position.y,transform.position.z),xPosOff,zPosOff,xNegOff, zNegOff, bulScale, xSpeed, ySpeed, zSpeed, doesItMove, bulletDestination,damage,name);
 					}
 						
 
@@ -1592,7 +1612,7 @@ public class PlayerFunction : NetworkBehaviour
 
 
 	void spawnBullet(Vector3 parent, float XPosOff,float ZPosOff, float XNegOff, float ZNegOff,
-					Vector3 scaleFactor, float XSpeed, float YSpeed, float ZSpeed, bool Mover, Vector3 bulletTarget, float Dmg)
+		Vector3 scaleFactor, float XSpeed, float YSpeed, float ZSpeed, bool Mover, Vector3 bulletTarget, float Dmg, string Shooter)
 	{
 		
 		//set the transform of the bullet then instantiate and spawn
@@ -1616,6 +1636,8 @@ public class PlayerFunction : NetworkBehaviour
 		bulletsScript.speedX = XSpeed;
 		bulletsScript.doWeMove = Mover;
 		bulletsScript.dmg = Dmg;
+		bulletsScript.shooter = Shooter;
+		bulletsScript.Player = this.gameObject;
 		GameObject.Instantiate(bullet, bulletPos, Quaternion.identity);
 
 
@@ -1625,7 +1647,7 @@ public class PlayerFunction : NetworkBehaviour
 
 	[Command]
 	void CmdspawnBullet(Vector3 parent, float XPosOff,float ZPosOff, float XNegOff, float ZNegOff,
-						Vector3 scaleFactor, float XSpeed, float YSpeed, float ZSpeed, bool Mover, Vector3 bulletTarget, float Dmg)
+		Vector3 scaleFactor, float XSpeed, float YSpeed, float ZSpeed, bool Mover, Vector3 bulletTarget, float Dmg, string Shooter)
 	{
 		GetMouseBulletClickLocation ();
 
@@ -1653,6 +1675,8 @@ public class PlayerFunction : NetworkBehaviour
 		bulletsScript.speedX = XSpeed;
 		bulletsScript.doWeMove = Mover;
 		bulletsScript.dmg = Dmg;
+		bulletsScript.shooter = Shooter;
+		bulletsScript.Player = this.gameObject;
 
 		GameObject.Instantiate(bullet, bulletPos, Quaternion.identity);
 

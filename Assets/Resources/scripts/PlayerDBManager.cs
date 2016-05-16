@@ -4,30 +4,36 @@ using System;
 using System.Data;
 using Mono.Data.Sqlite;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 public class PlayerDBManager : MonoBehaviour {
 
-	private List<DBDataInput> dbDataInput = new List<DBDataInput> ();
-	public GameObject player;
-	private PlayerFunction playerFunction;
-	private string connectionString;
+	public List<DBDataInput> dbDataInput = new List<DBDataInput> ();
+	public string connectionString;
+	//public Text text;
+
+	public GameObject textPrefab;
+	public Transform parent;
 
 	// Use this for initialization
 	void Start () {
 
+		//text.GetComponent<Text> ();
+
 		connectionString = "URI=file:" + Application.dataPath + "/PlayerInfoDB.sqlite";
-		player = GameObject.FindGameObjectWithTag ("Player");
-		playerFunction = player.GetComponent <PlayerFunction> ();
+		//player = GameObject.FindGameObjectWithTag ("Player");
+		//playerFunction = player.GetComponent <PlayerFunction> ();
 		CreateDataTable ();
-		InsertInfo (playerFunction.name, playerFunction.kills, playerFunction.deaths);
+		//InsertInfo (playerFunction.name, playerFunction.kills, playerFunction.deaths);
 		//DisplayDB ();
 		//DeleteEntry (1);
-		GetInfo ();
+		//UpdateInfo(2,1,1);
+		//GetInfo ();
 
 	}
 
-	private void CreateDataTable()	{
+	public void CreateDataTable()	{
 		using (IDbConnection dbConnection = new SqliteConnection (connectionString)) {
 			dbConnection.Open ();
 
@@ -42,7 +48,7 @@ public class PlayerDBManager : MonoBehaviour {
 		}
 	}
 
-	private void InsertInfo(string name, int kills, int deaths){
+	public void InsertInfo(string name, int kills, int deaths){
 		
 		using (IDbConnection dbConnection = new SqliteConnection (connectionString)) {
 			dbConnection.Open ();
@@ -58,9 +64,24 @@ public class PlayerDBManager : MonoBehaviour {
 		}
 	}
 
-	private void GetInfo ()	{
-		dbDataInput.Clear ();
+	public void UpdateInfo(int kills, int deaths, string name){
 
+		using (IDbConnection dbConnection = new SqliteConnection (connectionString)) {
+			dbConnection.Open ();
+
+			using (IDbCommand dbCmd = dbConnection.CreateCommand ()) {
+
+				string sqlQuerry = String.Format ("UPDATE GameInfo SET Kills = '{0}', Deaths = '{1}' WHERE Name = '{2}'", kills,deaths,name);
+
+				dbCmd.CommandText = sqlQuerry;
+				dbCmd.ExecuteScalar ();
+				dbConnection.Close ();
+			}
+		}
+	}
+
+	public void GetInfo ()	{
+		dbDataInput.Clear ();
 		using (IDbConnection dbConnection = new SqliteConnection (connectionString)) {
 			dbConnection.Open ();
 
@@ -71,9 +92,9 @@ public class PlayerDBManager : MonoBehaviour {
 
 				using (IDataReader reader = dbCmd.ExecuteReader ()) {
 					while (reader.Read ()) {
-						Debug.Log ("Player Name: " + reader.GetString(1) + " - Kills:  "+ reader.GetInt32(2) + " - Deaths: " + reader.GetInt32(3));
+						dbDataInput.Add (new DBDataInput (reader.GetInt32 (0), reader.GetString (1), reader.GetInt32 (2), reader.GetInt32 (3), reader.GetDateTime (4)));
 						// id - name - kills - deaths - date
-						dbDataInput.Add(new DBDataInput(reader.GetInt32(0),reader.GetString(1),reader.GetInt32(2),reader.GetInt32(3),reader.GetDateTime(4)));
+						Debug.Log ("	 " + reader.GetString (1) + " 	 " + reader.GetInt32 (2) + " 	" + reader.GetInt32 (3));
 					}
 					dbConnection.Close ();
 					reader.Close ();
@@ -82,7 +103,7 @@ public class PlayerDBManager : MonoBehaviour {
 		}
 	}
 
-	private void DeleteEntry(int id){
+	public void DeleteEntry(int id){
 		using (IDbConnection dbConnection = new SqliteConnection (connectionString)) {
 			dbConnection.Open ();
 
@@ -97,12 +118,42 @@ public class PlayerDBManager : MonoBehaviour {
 		}
 	}
 
-	/*private void DisplayDB(){		//will use later
-		for (int i = 0; i < dbDataInput.Count; i++) {
-			//Debug.Log (dbDataInput.Count);
-			DBDataInput tempStorage = dbDataInput [i];
-			InsertInfo(tempStorage.Name,tempStorage.Kills,tempStorage.Deaths);
-		}
+	public void DeleteAllEntries(){
+		using (IDbConnection dbConnection = new SqliteConnection (connectionString)) {
+			dbConnection.Open ();
 
-	}*/
+			using (IDbCommand dbCmd = dbConnection.CreateCommand ()) {
+
+				string sqlQuerry = String.Format("DELETE FROM GameInfo");
+
+				dbCmd.CommandText = sqlQuerry;
+				dbCmd.ExecuteScalar ();
+				dbConnection.Close ();
+			}
+		}
+	}
+
+	public void ShowInfo()
+	{
+		GetInfo ();
+		for (int i = 0; i < dbDataInput.Count; i++) 
+		{
+			GameObject holderObj = Instantiate (textPrefab);
+
+			DBDataInput holderdata = dbDataInput[i];
+
+			holderObj.GetComponent<ScoreManager> ().SetData (holderdata.Name, holderdata.Kills.ToString(), holderdata.Deaths.ToString());
+		
+			holderObj.transform.SetParent (parent);
+
+			holderObj.GetComponent<RectTransform>().localScale = new Vector3 (0.9f, 0.9f, 0.9f);
+		}
+	}
+
+	public void ClearInfo()
+	{
+		foreach (Transform children in parent) {
+			Destroy (children.gameObject);
+		}
+	}
 }
