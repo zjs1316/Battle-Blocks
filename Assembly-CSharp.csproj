@@ -49,10 +49,8 @@
      <Compile Include="Assets\Resources\scripts\BulletScript.cs" />
      <Compile Include="Assets\Resources\scripts\CameraLockScript.cs" />
      <Compile Include="Assets\Resources\scripts\CameraSetActiveScript.cs" />
-     <Compile Include="Assets\Resources\scripts\Chat.cs" />
      <Compile Include="Assets\Resources\scripts\DBDataInput.cs" />
      <Compile Include="Assets\Resources\scripts\DontDestroy.cs" />
-     <Compile Include="Assets\Resources\scripts\MyNetworkManager.cs" />
      <Compile Include="Assets\Resources\scripts\ObjectLabel.cs" />
      <Compile Include="Assets\Resources\scripts\PlayerDBManager.cs" />
      <Compile Include="Assets\Resources\scripts\PlayerEnableScripts.cs" />
