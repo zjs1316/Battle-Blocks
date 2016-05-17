@@ -31,8 +31,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127044}
   m_LocalRotation: {x: 0, y: 0.72013557, z: 0, w: 0.6938334}
-  m_LocalPosition: {x: -8.201073, y: 495, z: -4.372467}
-  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_LocalPosition: {x: -31.288033, y: 5.05801, z: -11.19631}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doWeMove: 1
-  speedZ: 500
+  speedZ: 100
   speedX: 0
   speedY: 0
   rb: {fileID: 0}
@@ -117,12 +117,12 @@ MonoBehaviour:
   playerCollision: 0
   xTarg: -20.171389
   zTarg: 88.6704
-  dmg: 45
+  dmg: 15
   OthersHealth: 0
   dbManager: {fileID: 0}
   playerDBManager: {fileID: 0}
   direction: {x: -20.171389, y: 5, z: 88.6704}
-  targetLocation: {x: -8.201073, y: -5, z: -4.372467}
+  targetLocation: {x: 63.49701, y: 5, z: -2.7839813}
 --- !u!114 &11435922
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -280,10 +280,10 @@ public class PlayerFunction : NetworkBehaviour
 		bul = (GameObject)Resources.Load("bullet");
 
 		dbManager = GameObject.FindGameObjectWithTag ("DB");
-		playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
+		//playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
 
 		Debug.Log (name);
-		playerDBManager.InsertInfo (name, kills, deaths);
+		//playerDBManager.InsertInfo (name, kills, deaths);
 		//UI setup
 		healthText = GameObject.Find ("Health Text").GetComponent<Text> ();
 		print (healthText);
