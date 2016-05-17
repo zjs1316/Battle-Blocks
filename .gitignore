@@ -18,6 +18,12 @@ ExportedObj/
 *.booproj
 *.svd
 
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
 
 # Unity3D generated meta files
 *.pidb.meta
