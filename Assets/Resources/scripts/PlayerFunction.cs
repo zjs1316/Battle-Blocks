@@ -17,8 +17,8 @@ public class PlayerFunction : NetworkBehaviour
 
 	public BulletScript bulletScript;
 	public Transform mover; //the object being moved
-	public float SnapTo = 2f; //how close we get before snapping to the desination
-	private Vector3 destination = Vector3.zero; //where we want to move
+	public float SnapTo = 1f; //how close we get before snapping to the desination
+	public Vector3 destination = Vector3.zero; //where we want to move
 	public Vector3 bulletDestination = Vector3.zero; //where we want the bullet to move
     public Vector3 bulletPos;
 
@@ -78,10 +78,10 @@ public class PlayerFunction : NetworkBehaviour
 
 	//spawn info for going into the arena
 	public List<Vector3> spawn = new List<Vector3>();
-	Vector3 spawn1 = new Vector3(1276f, 4.0f, -63f);
-	Vector3 spawn2 = new Vector3(816f, 4.0f, 390f);
-	Vector3 spawn3 = new Vector3(1276f, 4.0f, 390f);
-	Vector3 spawn4 = new Vector3(816f, 4.0f, -63f); 
+	Vector3 spawn1 = new Vector3(1276f, 5.0f, -63f);
+	Vector3 spawn2 = new Vector3(816f, 5.0f, 390f);
+	Vector3 spawn3 = new Vector3(1276f, 5.0f, 390f);
+	Vector3 spawn4 = new Vector3(816f, 5.0f, -63f); 
 	public GameObject player2;
 	public GameObject player3;
 	public GameObject player4;
@@ -91,9 +91,9 @@ public class PlayerFunction : NetworkBehaviour
 	//reusable ability variables
 	bool DamageBuff = false;
 	public float maxHp = 100f;
-	public float currentHp;
-	public float health = 100f;
-	public float healthRegen = 0.5f;
+	public double currentHp;
+	public double health = 100f;
+	public double healthRegen = 2f;
 	public bool regen = true;
 	bool postArmorBoost = false;
 	float tempHp = 0.0f;
@@ -261,6 +261,7 @@ public class PlayerFunction : NetworkBehaviour
 		//All the Setup happens here
 
 		myAgent = gameObject.GetComponent<NavMeshAgent> ();
+		myAgent.updateRotation = false;
 
 		DontDestroyOnLoad(gameObject);
 		name = gameObject.GetComponentInParent<PlayerID> ().playerUniqueIdentity;
@@ -282,6 +283,7 @@ public class PlayerFunction : NetworkBehaviour
 		playerDBManager.InsertInfo (name, kills, deaths);
 		//UI setup
 		healthText = GameObject.Find ("Health Text").GetComponent<Text> ();
+		print (healthText);
 
 		QPanel =  GameObject.Find("Q Panel").GetComponent<Image>();
 		QPanelHighlight =  GameObject.Find("Q Panel Highlight").GetComponent<Image>();
@@ -339,11 +341,27 @@ public class PlayerFunction : NetworkBehaviour
 		int r = Random.Range(0,4);
 		Vector3 temp = spawn [r];
 		float tempX =  temp.x;
-		float tempY =  temp.y;
+		float tempY =  5f;
 		float tempZ =  temp.z;
 
-		player2 = GameObject.Find ("Player 2");
-		player2.transform.position = new Vector3(tempX, tempY, tempZ);
+		print ("in to arena");
+		NavMeshAgent myMovingAgent = gameObject.GetComponent<NavMeshAgent> ();
+		print (myMovingAgent);
+		//myMovingAgent.updatePosition = false;
+		myMovingAgent.enabled = false;
+		gameObject.transform.position = new Vector3(1240f, 5f, 232f);
+		myMovingAgent.enabled = true;
+		destination = temp;
+		myMovingAgent.destination = temp;
+		//gameObject.transform.position = new Vector3(tempX, tempY, tempZ);
+		//print ("destination is " +  temp);
+
+
+
+
+		//myMovingAgent.updatePosition = true;
+		/*player2 = GameObject.Find ("Player 2");
+		gameObject.transform.position = new Vector3(tempX, tempY, tempZ);
 
 		//VVV change the GameObject player2 to the new GameObject VVV//
 
@@ -351,11 +369,17 @@ public class PlayerFunction : NetworkBehaviour
 		//	|							|
 		//	V							V
 		player3 = GameObject.Find ("Player 3");
-		player3.transform.position = new Vector3(tempX, tempY, tempZ);
+		if (player3 != null) {
+			player3.transform.position = new Vector3 (tempX, tempY, tempZ);
+		}
 		player4 = GameObject.Find ("Player 4");
-		player4.transform.position = new Vector3(tempX, tempY, tempZ);
+		if (player4 != null) {
+			player4.transform.position = new Vector3 (tempX, tempY, tempZ);
+		}
 		player5 = GameObject.Find ("Player 5");
-		player5.transform.position = new Vector3(tempX, tempY, tempZ);
+		if (player5 != null) {
+			player5.transform.position = new Vector3 (tempX, tempY, tempZ);
+		}*/
 	}
 
 
@@ -522,7 +546,10 @@ public class PlayerFunction : NetworkBehaviour
         {
             if (regen == true)
             {
-                health += healthRegen;
+				
+				health += healthRegen;
+				health = System.Math.Round (health, 3);
+				//health = Mathf.Round (health);
                 yield return new WaitForSeconds(1);
                 //print("IEnummerator health = " + health);
             }
@@ -538,6 +565,7 @@ public class PlayerFunction : NetworkBehaviour
     {
 		if(isLocalPlayer)
 		{
+			myAgent.speed = speed;
 			bulScale = Vector3.zero;
 			bulDmg=0f;
 
@@ -546,7 +574,8 @@ public class PlayerFunction : NetworkBehaviour
 				health = -1;
 			}
 
-			healthText.text = "Hp: " + health.ToString () + " / " + maxHp;
+			healthText.text = "Hp: " + health + " / " + maxHp;
+//			print (healthText.text);
 
 			if(health<=0)
 			{
@@ -1175,6 +1204,11 @@ public class PlayerFunction : NetworkBehaviour
 							destination.y = 5f;
 							inst.SetActive(true);
 							inst.transform.position = destination;
+							myAgent.SetDestination(destination);
+						//myAgent.Resume();
+							
+						//myAgent.acceleration = .25f;
+						//myAgent.Resume ();
 
 						}
 					}
@@ -1190,16 +1224,32 @@ public class PlayerFunction : NetworkBehaviour
 				//transform.LookAt(destination);
 
 			}
-			
+			*/
 			if(Vector3.Distance(mover.position, destination) < SnapTo)
 			{
 				mover.position = destination; //snap to destination
 				inst.SetActive(false);
 			}
-			*/
+
 
 			//new navmesh agent stuff
-			myAgent.destination = destination;
+
+
+			//transform.position = myAgent.gameObject.transform.position;
+
+			/*if (myAgent.remainingDistance < SnapTo) {
+				//print ("in snap");
+				//myAgent.velocity = Vector3.zero; //snap to destination
+				//myAgent.Stop(true);
+				myAgent.SetDestination (gameObject.transform.position);
+				//myAgent.ResetPath ();
+				//myAgent.acceleration = -10000f;
+				//myAgent.destination = Vector3.zero;
+				inst.SetActive (false);
+			} else {
+				
+				//myAgent.speed = .3f;
+			}*/
 
 
 
@@ -1386,7 +1436,7 @@ public class PlayerFunction : NetworkBehaviour
 				if (abilityW1IsOn && ( (abilityR3IsOn && abilityR3CooldownOn == false) && Input.GetMouseButtonDown(0)))
 
 	            {
-	                damage = 45;
+	                damage = 25;
 	                wBuff();
 	                counter = counter + 1;
 	            }
@@ -1723,6 +1773,7 @@ public class PlayerFunction : NetworkBehaviour
 		RPanelHighlight.enabled = false;
 
 		destination = transform.position;
+		myAgent.SetDestination(transform.position);
 		inst.SetActive(false); 
 	}
 }

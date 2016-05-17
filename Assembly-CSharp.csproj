@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{B8BAAD5F-6110-B689-AFD0-A46B4EBC9748}</ProjectGuid>
+    <ProjectGuid>{FC87EC9E-D07A-373E-FF54-3401CAB5A4FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -65,6 +65,7 @@
      <Compile Include="Assets\Resources\scripts\TargetSyncPos.cs" />
      <Compile Include="Assets\Resources\scripts\Vote.cs" />
      <Compile Include="Assets\Resources\scripts\bulletSync.cs" />
+     <Compile Include="Assets\lookatScript.cs" />
      <None Include="Assets\Resources\prototype_textures\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -73,10 +74,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Data.Sqlite">
- <HintPath>C:/Users/ps2fr/Documents/BattleBlocks/Assets/plugins/Mono.Data.Sqlite.dll</HintPath>
+ <HintPath>C:/Users/ps2fr/Documents/Battle-Blocks/Assets/plugins/Mono.Data.Sqlite.dll</HintPath>
  </Reference>
  <Reference Include="System.Data">
- <HintPath>C:/Users/ps2fr/Documents/BattleBlocks/Assets/plugins/System.Data.dll</HintPath>
+ <HintPath>C:/Users/ps2fr/Documents/Battle-Blocks/Assets/plugins/System.Data.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

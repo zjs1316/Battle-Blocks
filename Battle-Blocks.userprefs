@@ -1,11 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\ScoreBoard.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Resources\scripts\PlayerFunction.cs">
     <Files>
+      <File FileName="Assets\Resources\scripts\PlayerFunction.cs" Line="356" Column="51" />
       <File FileName="Assets\Resources\scripts\PlayerDBManager.cs" Line="156" Column="34" />
-      <File FileName="Assets\Resources\scripts\ScoreBoard.cs" Line="43" Column="33" />
-      <File FileName="Assets\Resources\scripts\ScoreManager.cs" Line="18" Column="1" />
+      <File FileName="Assets\Resources\scripts\ScoreBoard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\scripts\ScoreManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Resources\scripts\DBDataInput.cs" Line="1" Column="1" />
+      <File FileName="Assets\lookatScript.cs" Line="27" Column="32" />
+      <File FileName="Assets\Resources\scripts\BulletScript.cs" Line="33" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

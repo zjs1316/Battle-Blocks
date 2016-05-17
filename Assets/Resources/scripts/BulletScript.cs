@@ -24,7 +24,7 @@ public class BulletScript : NetworkBehaviour {
 	public float xTarg, zTarg;
 	public float dmg;
 
-	public float OthersHealth;
+	public double OthersHealth;
 
 	public GameObject dbManager;
 	public PlayerDBManager playerDBManager;
