@@ -11,6 +11,9 @@ public class PlayerFunction : NetworkBehaviour
 
 	NavMeshAgent myAgent;
 
+	bool invulnerable = true;
+	bool locked = false;
+
 	// If its the first time spawning a bullet, this boolean will send the client through
 	// a register prefab for the network if statement.
 	bool firstRegister = true;
@@ -349,10 +352,11 @@ public class PlayerFunction : NetworkBehaviour
 		print (myMovingAgent);
 		//myMovingAgent.updatePosition = false;
 		myMovingAgent.enabled = false;
-		gameObject.transform.position = new Vector3(1240f, 5f, 232f);
+		//gameObject.transform.position = new Vector3(1240f, 5f, 232f);
+		myMovingAgent.Warp(new Vector3(1240f, 5f, 232f));
 		myMovingAgent.enabled = true;
 		destination = temp;
-		myMovingAgent.destination = temp;
+		//myMovingAgent.destination = temp;
 		//gameObject.transform.position = new Vector3(tempX, tempY, tempZ);
 		//print ("destination is " +  temp);
 
@@ -565,6 +569,18 @@ public class PlayerFunction : NetworkBehaviour
     {
 		if(isLocalPlayer)
 		{
+			if (gameObject.transform.position.x > 225) {
+				invulnerable = false;
+				locked = true;
+			}
+			else{invulnerable = true;}
+			if (invulnerable) {
+				health = 100;
+			}
+			if (locked == true && gameObject.transform.position.x < 230) {
+				gameObject.transform.position = new Vector3(230f,transform.position.y,transform.position.z);
+			}
+
 			myAgent.speed = speed;
 			bulScale = Vector3.zero;
 			bulDmg=0f;
@@ -581,6 +597,7 @@ public class PlayerFunction : NetworkBehaviour
 			{
 				gameObject.transform.position = new Vector3(0f,5f,0f);
 				deaths = deaths + 1;
+				locked = false;
 
 				playerDBManager.UpdateInfo (kills, deaths, name);
 				health = 100;

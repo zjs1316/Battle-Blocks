@@ -415,7 +415,7 @@ MonoBehaviour:
   bulletScript: {fileID: 11421958, guid: d79d06b0988c50740bf68cd1840ae7fc, type: 2}
   mover: {fileID: 410610}
   SnapTo: 0.5
-  destination: {x: 1276, y: 4, z: -63}
+  destination: {x: 1276, y: 4, z: 390}
   bulletDestination: {x: 0, y: 0, z: 0}
   bulletPos: {x: 0, y: 0, z: 0}
   speed: 35
