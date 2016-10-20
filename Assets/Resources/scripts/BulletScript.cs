@@ -36,7 +36,7 @@ public class BulletScript : NetworkBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		dbManager = GameObject.FindGameObjectWithTag ("DB");
+		//dbManager = GameObject.FindGameObjectWithTag ("DB");
 		//playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
 		rb = GetComponent<Rigidbody>();
 		print ("target location on the bullet" + targetLocation);
