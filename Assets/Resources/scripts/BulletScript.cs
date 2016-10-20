@@ -37,7 +37,7 @@ public class BulletScript : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
 		dbManager = GameObject.FindGameObjectWithTag ("DB");
-		playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
+		//playerDBManager = dbManager.GetComponent <PlayerDBManager> ();
 		rb = GetComponent<Rigidbody>();
 		print ("target location on the bullet" + targetLocation);
 		NetworkServer.Spawn (gameObject);
@@ -113,7 +113,7 @@ public class BulletScript : NetworkBehaviour {
 	void IsItAKill(){
 		if (OthersHealth <= 0) {
 			Player.GetComponent<PlayerFunction> ().kills = Player.GetComponent<PlayerFunction> ().kills + 1; 
-			playerDBManager.UpdateInfo (Player.GetComponent<PlayerFunction> ().kills, Player.GetComponent<PlayerFunction> ().deaths, shooter);
+			//playerDBManager.UpdateInfo (Player.GetComponent<PlayerFunction> ().kills, Player.GetComponent<PlayerFunction> ().deaths, shooter);
 		}
 	}
 
